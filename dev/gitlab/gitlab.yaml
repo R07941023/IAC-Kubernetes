@@ -1,0 +1,84 @@
+# Deploy service
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab # pod name
+  namespace: infra-net # namespace name
+spec:
+  type: NodePort
+  ports:
+  - name: gui # port setting
+    protocol: TCP
+    port: 80  # service port
+    targetPort: 80  # container port
+    nodePort: 30833 # node port
+  - name: https # port setting
+    protocol: TCP
+    port: 443  # service port
+    targetPort: 443  # container port
+  - name: ssh # port setting
+    protocol: TCP
+    port: 22  # service port
+    targetPort: 22  # container port
+  selector:
+    app: gitlab # pod name
+   
+---
+# Deploys a new MinIO Pod into the metadata.namespace Kubernetes namespace
+#
+# The `spec.containers[0].args` contains the command run on the pod
+# The `/data` directory corresponds to the `spec.containers[0].volumeMounts[0].mountPath`
+# That mount path corresponds to a Kubernetes HostPath which binds `/data` to a local drive or volume on the worker node where the pod runs
+# 
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: gitlab # pod name
+  name: gitlab # pod name
+  namespace: infra-net # namespace name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitlab
+  template:
+    metadata:
+      labels:
+        app: gitlab
+    spec:
+      containers:
+      - name: gitlab # container name
+        image: gitlab/gitlab-ce:latest
+        imagePullPolicy: IfNotPresent
+        securityContext:
+            privileged: true
+        ports:
+        - containerPort: 80 # container port
+          name: gui
+        - containerPort: 443 # container port
+          name: https
+        - containerPort: 22 # container port
+          name: ssh
+        volumeMounts:
+        - name: data # mount name
+          mountPath: /var/opt/gitlab  # mount path
+        - name: log # mount name
+          mountPath: /var/log/gitlab  # mount path
+        - name: config # mount name
+          mountPath: /etc/gitlab  # mount path
+        - name: backup # mount name
+          mountPath: /mnt  # mount path
+      volumes:
+        - name: data # mount name
+          persistentVolumeClaim:
+            claimName: gitlab-data-pvc
+        - name: log # mount name
+          persistentVolumeClaim:
+            claimName: gitlab-log-pvc
+        - name: config # mount name
+          persistentVolumeClaim:
+            claimName: gitlab-config-pvc
+        - name: backup # mount name
+          persistentVolumeClaim:
+            claimName: gitlab-backup-pvc

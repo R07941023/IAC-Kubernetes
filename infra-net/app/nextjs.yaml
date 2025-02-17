@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs # project name
+  namespace: infra-net  # name space
+spec:
+  replicas: 2 # pod number
+  selector:
+    matchLabels:
+      app: nextjs # project name
+  template:
+    metadata:
+      labels:
+        app: nextjs # project name 
+    spec:
+      containers:
+      - name: nextjs # project name
+        image: yenyinglu/nextjs-base # docker image
+        ports:
+        - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextjs
+  namespace: infra-net # name space
+spec:
+  selector:
+    app: nextjs  # project name
+  ports:
+    - protocol: TCP
+      port: 3000       # cluster port
+      targetPort: 3000  # pod port (container port)
+      nodePort: 30300 # node port
+  type: NodePort 

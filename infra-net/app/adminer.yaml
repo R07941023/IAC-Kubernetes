@@ -1,0 +1,47 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminer
+  namespace: infra-net
+  labels:
+    app: adminer
+spec:
+  selector:
+    matchLabels:
+      app: adminer
+  template:
+    metadata:
+      labels:
+        app: adminer
+    spec:
+      containers:
+        - name: adminer
+          image: adminer:4.6.3
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer
+  namespace: infra-net
+spec:
+  type: NodePort
+  ports:
+  - name: 8080-tcp  # port setting
+    protocol: TCP
+    port: 8080  # service port
+    targetPort: 8080  # container port
+    nodePort: 30830 # node port
+  selector:
+    app: adminer

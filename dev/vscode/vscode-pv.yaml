@@ -1,0 +1,69 @@
+# Deploy vscode pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vscode-data-pv  # storage name
+spec:
+  storageClassName: vscode-data-pv
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: "/volume1/backend"
+    server: 192.168.100.145  # homeNAS
+  persistentVolumeReclaimPolicy: Retain
+---
+
+# Deploy config pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vscode-config-pv  # storage name
+spec:
+  storageClassName: vscode-config-pv
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: "/volume1/backend/compiler/vscode/config"
+    server: 192.168.100.145  # homeNAS
+  persistentVolumeReclaimPolicy: Retain
+    
+---
+
+# Deploy vscode pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vscode-data-pvc  # storage name
+  namespace: infra-net  # namespace name
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: vscode-data-pv
+  
+---
+ 
+ # Deploy config pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vscode-config-pvc  # storage name
+  namespace: infra-net  # namespace name
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: vscode-config-pv
+  

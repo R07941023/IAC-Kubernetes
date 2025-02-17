@@ -1,0 +1,8 @@
+# Deploys a new Namespace for infra
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: infra-net # namespace name
+  labels:
+    name: infra-net # namespace name
+---

@@ -1,0 +1,71 @@
+# Deploy service
+apiVersion: v1
+kind: Service
+metadata:
+  name: vscode-chieh # pod name
+  namespace: infra-net # namespace name
+spec:
+  type: NodePort
+  ports:
+  - name: vscode  # port setting
+    protocol: TCP
+    port: 8090  # service port
+    targetPort: 8090  # container port
+    nodePort: 30812 # node port
+  - name: frontend # port setting
+    protocol: TCP
+    port: 3000 # service port
+    targetPort: 3000 # container port
+    nodePort: 30104 # node port
+  selector:
+    app: vscode-chieh # pod name
+  
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: vscode-chieh  # pod name
+  name: vscode-chieh # pod name
+  namespace: infra-net # namespace name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vscode-chieh
+  template:
+    metadata:
+      labels:
+        app: vscode-chieh
+    spec:
+      containers:
+      - name: vscode-chieh # container name
+        image: yenyinglu/vscode
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: WATCHPACK_POLLING
+          value: "true"
+        - name: PASSWORD
+          value: "" # password
+        command: ["code-server"]
+        args: ["--auth", "password", "--disable-telemetry", "--bind-addr", "0.0.0.0:8090"]
+        # add port for pod
+        ports:
+        - containerPort: 8090 # container port
+          name: vscode
+        - containerPort: 3002 # container port
+          name: frontend
+        volumeMounts:
+        - name: project # mount name
+          mountPath: /mnt  # mount path
+        - name: config # mount name
+          mountPath: /home/coder/.config/code-server  # mount path
+      volumes:
+        - name: project # mount name
+          persistentVolumeClaim:
+            claimName: vscode-chieh-data-pvc
+        - name: config # mount name
+          persistentVolumeClaim:
+            claimName: vscode-config-pvc

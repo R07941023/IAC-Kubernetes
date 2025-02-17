@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-one
+  namespace: infra-net
+spec:
+  type: NodePort
+  ports:
+  - name: 9090-tcp  # port setting
+    protocol: TCP
+    port: 3306  # service port
+    targetPort: 3306  # container port
+    nodePort: 30370 # node port
+  selector:
+    app: mariadb-one
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-one
+  namespace: infra-net
+spec:
+  serviceName: mariadb-one
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb-one
+  template:
+    metadata:
+      labels:
+        app: mariadb-one
+    spec:
+        containers:
+          - name: mariadb-one
+            image: mariadb
+            imagePullPolicy: IfNotPresent
+            securityContext:
+                privileged: true
+                runAsUser: 1024
+            ports:
+            - containerPort: 3306
+              protocol: TCP
+            env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: ""
+            - name: MYSQL_DATABASE
+              value: ""
+            - name: MYSQL_USER
+              value: ""
+            - name: MYSQL_PASSWORD
+              value: ""
+            volumeMounts:
+            - name: mariadb-data-one
+              mountPath: /var/lib/mysql
+        volumes:
+        - name: mariadb-data-one # mount name
+          persistentVolumeClaim:
+            claimName: mariadb-data-pvc

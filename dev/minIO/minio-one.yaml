@@ -1,0 +1,69 @@
+# Deploy service for minio
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-one # pod name
+  namespace: infra-net # namespace name
+spec:
+  type: NodePort
+  ports:
+  - name: 9090-tcp  # port setting
+    protocol: TCP
+    port: 9090  # service port
+    targetPort: 9090  # container port
+    nodePort: 30831 # node port
+  - name: 9000-tcp # port setting
+    protocol: TCP
+    port: 9000 # service port
+    targetPort: 9000 # container port
+    nodePort: 30900 # node port
+  selector:
+    app: minio-one # pod name
+
+---
+# Deploys a new MinIO Pod into the metadata.namespace Kubernetes namespace
+#
+# The `spec.containers[0].args` contains the command run on the pod
+# The `/data` directory corresponds to the `spec.containers[0].volumeMounts[0].mountPath`
+# That mount path corresponds to a Kubernetes HostPath which binds `/data` to a local drive or volume on the worker node where the pod runs
+# 
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: minio-one  # pod name
+  name: minio-one # pod name
+  namespace: infra-net # namespace name
+spec:
+  selector:
+    matchLabels:
+      app: minio-one
+  template:
+    metadata:
+      labels:
+        app: minio-one
+    spec:
+      containers:
+      - name: minio-one # container name
+        image: minio/minio
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: MINIO_ACCESS_KEY
+          value: "minio" # username
+        - name: MINIO_SECRET_KEY
+          value: "ji3g4minio" # password
+        command: ["minio"]
+        args: ["server", "/data", "--console-address", ":9090", "--address", ":9000"]
+        # add port for pod
+        ports:
+        - containerPort: 9090 # container port
+          name: console-address
+        - containerPort: 9000 # container port
+          name: address
+        volumeMounts:
+        - name: minio-data # mount name
+          mountPath: /data  # mount path
+      volumes:
+        - name: minio-data # mount name
+          persistentVolumeClaim:
+            claimName: minio-data-pvc
