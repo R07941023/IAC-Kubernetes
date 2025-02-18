@@ -27,7 +27,6 @@ kubectl create namespace infra-net
 ## adminer
 ```bash
 kubectl apply -f adminer.yaml
-kubectl apply -f adminer.yaml
 ```
 
 # Delete
