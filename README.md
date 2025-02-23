@@ -11,17 +11,8 @@ kubectl create token kubernetes-dashboard-token -n kubernetes-dashboard
 ```
 
 # Create augoCD
-## build resource
-```bash
-kubectl create namespace argocd
-kubectl apply -n argocd -f argocd.yaml
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d
-```
+## tutorial: https://medium.com/@a5822358/kubernetes-82b30b35a497
 
-# Create nameSpace
-```bash
-kubectl create namespace infra-net
-```
 
 # Create base app
 ## adminer
