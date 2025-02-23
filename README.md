@@ -11,7 +11,7 @@ kubectl create token kubernetes-dashboard-token -n kubernetes-dashboard
 ```
 
 # Create augoCD
-## tutorial: https://medium.com/@a5822358/kubernetes-82b30b35a497
+tutorial: https://medium.com/@a5822358/kubernetes-82b30b35a497
 
 
 # Create base app
