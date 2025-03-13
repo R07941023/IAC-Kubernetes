@@ -3,7 +3,7 @@
 # Create dashboard
 ## build resource
 ```bash
-kubectl apply -f dashboard-admin.yaml
+kubectl apply -f dashboard.yaml
 ```
 ## get token
 ```bash
