@@ -18,6 +18,12 @@ tutorial: https://medium.com/@a5822358/kubernetes-82b30b35a497
 ## adminer
 ```bash
 kubectl apply -f adminer.yaml
+```
+## monitor
+tutorial: https://medium.com/@a5822358/prometheus-3088279e5dd8
+```bash
+kubectl create configmap prometheus --from-file=prometheus.yml -n infra-net
+kubectl apply -f prometheus.yaml
 kubectl apply -f grafana.yaml
 ```
 
