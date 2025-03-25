@@ -18,6 +18,7 @@ tutorial: https://medium.com/@a5822358/kubernetes-82b30b35a497
 ## adminer
 ```bash
 kubectl apply -f adminer.yaml
+kubectl apply -f grafana.yaml
 ```
 
 # Delete
