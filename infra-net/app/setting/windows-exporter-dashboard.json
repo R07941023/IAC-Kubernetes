@@ -19,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 1,
+  "id": 11,
   "links": [],
   "panels": [
     {
@@ -178,10 +178,12 @@
             "type": "prometheus",
             "uid": "cegx0v5gjeqdcd"
           },
+          "editorMode": "code",
           "expr": "100 - (avg by (instance) (irate(windows_cpu_time_total{mode=\"idle\", instance=~\"$server\"}[1m])) * 100)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -261,9 +263,11 @@
             "type": "prometheus",
             "uid": "cegx0v5gjeqdcd"
           },
+          "editorMode": "code",
           "expr": "(windows_cs_physical_memory_bytes{instance=~\"$server\"} - windows_os_physical_memory_free_bytes{instance=~\"$server\"}) / windows_cs_physical_memory_bytes{instance=~\"$server\"} * 100",
           "format": "time_series",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A"
         }
       ],
@@ -430,7 +434,7 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -840,7 +844,7 @@
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 8,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -849,7 +853,7 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 3,
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -896,7 +900,7 @@
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "hideZeros": false,
@@ -914,7 +918,8 @@
             "type": "prometheus",
             "uid": "cegx0v5gjeqdcd"
           },
-          "expr": "windows_cs_physical_memory_bytes{instance=~\"$server\"}",
+          "editorMode": "code",
+          "expr": "windows_cs_physical_memory_bytes{instance=~\"$server\"} - windows_os_physical_memory_free_bytes{instance=~\"$server\"}",
           "format": "time_series",
           "functions": [],
           "group": {
@@ -934,81 +939,9 @@
           "options": {
             "showDisabledItems": false
           },
+          "range": true,
           "refId": "B",
           "step": 5
-        },
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
-          },
-          "expr": "windows_os_physical_memory_free_bytes{instance=~\"$server\"}",
-          "format": "time_series",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "intervalFactor": 1,
-          "item": {
-            "filter": ""
-          },
-          "legendFormat": "Free physical memory",
-          "metric": "mysql_global_status_questions",
-          "mode": 0,
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "C",
-          "step": 5
-        },
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
-          },
-          "expr": "windows_os_virtual_memory_bytes{instance=~\"$server\"}",
-          "format": "time_series",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "intervalFactor": 1,
-          "item": {
-            "filter": ""
-          },
-          "legendFormat": "Virtual memory",
-          "metric": "mysql_global_status_questions",
-          "mode": 0,
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "A",
-          "step": 5
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
-          },
-          "expr": "windows_os_virtual_memory_free_bytes{instance=~\"$server\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Free virtual memory",
-          "refId": "D"
         }
       ],
       "title": "Memory Usage",
@@ -1657,7 +1590,7 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -1791,8 +1724,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Windows Exporter Dashboard",
-  "uid": "7UlnHoGZz",
-  "version": 19,
+  "title": "dormroom",
+  "uid": "7UlnHoGZa",
+  "version": 6,
   "weekStart": ""
 }
