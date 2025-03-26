@@ -3,31 +3,28 @@
 # Create dashboard
 ## build resource
 ```bash
-kubectl apply -f dashboard-admin.yaml
+kubectl apply -f dashboard.yaml
 ```
 ## get token
 ```bash
-kubectl create token kubernetes-dashboard-token -n kubernetes-dashboard
+kubectl get secret admin -n kubernetes-dashboard -o jsonpath={".data.token"}
 ```
 
 # Create augoCD
-## build resource
-```bash
-kubectl create namespace argocd
-kubectl apply -n argocd -f argocd.yaml
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d
-```
+tutorial: https://medium.com/@a5822358/kubernetes-82b30b35a497
 
-# Create nameSpace
-```bash
-kubectl create namespace infra-net
-```
 
 # Create base app
 ## adminer
 ```bash
 kubectl apply -f adminer.yaml
-kubectl apply -f adminer.yaml
+```
+## monitor
+tutorial: https://medium.com/@a5822358/prometheus-3088279e5dd8
+```bash
+kubectl create configmap prometheus --from-file=prometheus.yml -n infra-net
+kubectl apply -f prometheus.yaml
+kubectl apply -f grafana.yaml
 ```
 
 # Delete
