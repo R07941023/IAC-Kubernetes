@@ -25,7 +25,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "description": "",
       "fieldConfig": {
@@ -91,7 +91,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "expr": "windows_cs_logical_processors{instance=~\"$server\"}",
@@ -108,7 +108,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -176,7 +176,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "expr": "100 - (avg by (instance) (irate(windows_cpu_time_total{mode=\"idle\", instance=~\"$server\"}[1m])) * 100)",
@@ -193,7 +193,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -261,7 +261,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "expr": "(windows_cs_physical_memory_bytes{instance=~\"$server\"} - windows_os_physical_memory_free_bytes{instance=~\"$server\"}) / windows_cs_physical_memory_bytes{instance=~\"$server\"} * 100",
@@ -277,7 +277,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -345,7 +345,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "expr": "max(DCGM_FI_DEV_FB_USED{instance=~\"mydormroom\"})",
@@ -361,7 +361,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -448,7 +448,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "expr": "(avg without (cpu) (sum(irate(windows_cpu_time_total{instance=\"$server\",mode!=\"idle\"}[5m])) by (mode)))* 100",
@@ -465,7 +465,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "description": "",
       "fieldConfig": {
@@ -531,7 +531,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "windows_cs_physical_memory_bytes{instance=~\"$server\"}",
           "format": "time_series",
@@ -546,7 +546,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -622,7 +622,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "100 - (windows_logical_disk_free_bytes{instance=~\"$server\"} / windows_logical_disk_size_bytes{instance=~\"$server\"})*100",
           "format": "time_series",
@@ -635,7 +635,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "windows_logical_disk_free_bytes{instance=~\"$server\"}",
           "hide": true,
@@ -650,7 +650,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -718,7 +718,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "(sum(windows_logical_disk_size_bytes{volume!~\"Harddisk.*\", instance=\"$server\"}) by (instance) - sum(windows_logical_disk_free_bytes{volume!~\"Harddisk.*\", instance=\"$server\"}) by (instance)) / sum(windows_logical_disk_size_bytes{volume!~\"Harddisk.*\", instance=\"$server\"}) by (instance) * 100",
           "format": "time_series",
@@ -732,7 +732,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -801,7 +801,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "(sum(irate(windows_net_bytes_total{instance=\"$server\"}[1m])) > 1)* 8",
           "format": "time_series",
@@ -813,7 +813,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "  sum(irate(windows_net_bytes_total{instance=~\"$server\",nic=\"Red_Hat_VirtIO_Ethernet_Adapter\"}[5m])) / sum(windows_net_current_bandwidth{instance=~\"$server\",nic=\"Red_Hat_VirtIO_Ethernet_Adapter\"}/8) * 100",
           "format": "time_series",
@@ -828,7 +828,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -916,7 +916,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "expr": "windows_cs_physical_memory_bytes{instance=~\"$server\"} - windows_os_physical_memory_free_bytes{instance=~\"$server\"}",
@@ -950,7 +950,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "description": "",
       "fieldConfig": {
@@ -1034,7 +1034,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1051,7 +1051,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -1140,7 +1140,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "rate(windows_net_bytes_sent_total{instance=~\"$server\"}[$interval]) >0",
           "format": "time_series",
@@ -1172,7 +1172,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "- rate(windows_net_bytes_received_total{instance=~\"$server\"}[$interval]) <0",
           "format": "time_series",
@@ -1205,7 +1205,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -1295,7 +1295,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "editorMode": "code",
           "expr": "DCGM_FI_DEV_GPU_TEMP{instance=~\"mydormroom\"}",
@@ -1311,7 +1311,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -1398,7 +1398,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "sum(increase(windows_net_bytes_received_total{instance=\"$server\"}[1h])) by (instance)",
           "format": "time_series",
@@ -1410,7 +1410,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "sum(increase(windows_net_bytes_sent_total{instance=\"$server\"}[1h])) by (instance)",
           "format": "time_series",
@@ -1426,7 +1426,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -1486,7 +1486,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "windows_logical_disk_free_bytes{instance=~\"$server\", volume !~\"HarddiskVolume.+\"}",
           "format": "time_series",
@@ -1518,7 +1518,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cegx0v5gjeqdcd"
+        "uid": null
       },
       "fieldConfig": {
         "defaults": {
@@ -1607,7 +1607,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "irate(windows_logical_disk_write_bytes_total{instance=~\"$server\", volume !~\"HarddiskVolume.+\"}[60s])",
           "format": "time_series",
@@ -1638,7 +1638,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "cegx0v5gjeqdcd"
+            "uid": null
           },
           "expr": "- irate(windows_logical_disk_read_bytes_total{instance=~\"$server\", volume !~\"HarddiskVolume.+\"}[60s])",
           "format": "time_series",
@@ -1705,7 +1705,7 @@
           "text": "mydormroom",
           "value": "mydormroom"
         },
-        "datasource": "cegx0v5gjeqdcd",
+        "datasource": null,
         "definition": "label_values(windows_cpu_time_total, instance)",
         "includeAll": false,
         "label": "Server",
