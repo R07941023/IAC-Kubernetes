@@ -1,0 +1,8 @@
+# Deploys a new Namespace for game
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ai # namespace name
+  labels:
+    name: ai # namespace name
+---
