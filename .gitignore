@@ -1,2 +1,4 @@
 cli/
 infra-net/.keyvault
+app/.keyvault
+game/.keyvault

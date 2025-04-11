@@ -1,0 +1,1 @@
+kubectl create configmap maplestory --from-file=settings.ini -n game
