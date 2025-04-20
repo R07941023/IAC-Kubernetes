@@ -23,23 +23,7 @@ spec:
               mountPath: /app/backend/data
           env:
             - name: HOST_DOCKER_INTERNAL
-              value: "host.docker.internal"  # 設置環境變量，指向宿主機
+              value: "host.docker.internal"
       volumes:
         - name: open-webui-volume
           emptyDir: {}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: open-webui
-  namespace: ai
-spec:
-  selector:
-    app: open-webui
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
-      nodePort: 30834  # Exposed port on the node
-  type: NodePort

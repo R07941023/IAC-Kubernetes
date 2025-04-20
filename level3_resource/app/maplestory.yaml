@@ -26,7 +26,7 @@ spec:
               export DISPLAY=:0 &&
               apt-get install -y git &&
               git clone -b dev  http://host.docker.internal:30832/YYLUI/maplestory_v113.git &&
-              cp -f /tmp/config/settings.ini /app/maplestory_v113/settings.ini &&
+              cp -f /tmp/config/maplestory-setting.ini /app/maplestory_v113/settings.ini &&
               cd /app/maplestory_v113 && chmod 777 ./run.sh && ./run.sh
           ports:
             - containerPort: 8484
@@ -44,40 +44,3 @@ spec:
           configMap:
             name: maplestory
       restartPolicy: Always
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: maplestory
-  namespace: game
-spec:
-  type: NodePort
-  selector:
-    app: maplestory
-  ports:
-    - name: login
-      protocol: TCP
-      port: 8484
-      targetPort: 8484
-      nodePort: 30084
-    - name: channel1
-      protocol: TCP
-      port: 7575
-      targetPort: 7575
-      nodePort: 30075
-    - name: channel2
-      protocol: TCP
-      port: 7576
-      targetPort: 7576
-      nodePort: 30076
-    - name: channel3
-      protocol: TCP
-      port: 7577
-      targetPort: 7577
-      nodePort: 30077
-    - name: cash
-      protocol: TCP
-      port: 2555
-      targetPort: 2555
-      nodePort: 30025

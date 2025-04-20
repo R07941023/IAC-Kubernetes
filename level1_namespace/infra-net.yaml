@@ -1,4 +1,3 @@
-# Deploys a new Namespace for infra
 apiVersion: v1
 kind: Namespace
 metadata:
