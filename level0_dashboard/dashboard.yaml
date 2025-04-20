@@ -30,6 +30,16 @@ metadata:
 ---
 
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+
+---
+
+apiVersion: v1
 kind: Secret
 metadata:
   name: admin
@@ -52,25 +62,6 @@ subjects:
   - kind: ServiceAccount
     name: admin
     namespace: kubernetes-dashboard
-
----
-
-kind: Service
-apiVersion: v1
-metadata:
-  labels:
-    k8s-app: kubernetes-dashboard
-  name: kubernetes-dashboard
-  namespace: kubernetes-dashboard
-spec:
-  type: NodePort
-  ports:
-    - port: 443
-      targetPort: 8443
-      nodePort: 30800 # node port
-  selector:
-    k8s-app: kubernetes-dashboard
-
 ---
 
 apiVersion: v1
@@ -226,7 +217,7 @@ spec:
           args:
             - --auto-generate-certificates
             - --namespace=kubernetes-dashboard
-            - --token-ttl=86400
+            - --token-ttl=315360000
             # Uncomment the following line to manually specify Kubernetes API server Host
             # If not specified, Dashboard will attempt to auto discover the API server and connect
             # to it. Uncomment only if the default does not work.

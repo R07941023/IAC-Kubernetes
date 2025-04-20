@@ -1,2 +1,3 @@
 cli/
-infra-net/.keyvault
+level3_resource/secret/secret_game.ini
+level3_resource/secret/secret_infra_net.ini
