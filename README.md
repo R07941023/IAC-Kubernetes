@@ -7,7 +7,7 @@ kubectl apply -f dashboard.yaml
 ```
 ## get token
 ```bash
-kubectl get secret admin -n kubernetes-dashboard -o jsonpath={".data.token"}
+kubectl -n kubernetes-dashboard create token admin --duration=8760h
 ```
 
 # Create augoCD

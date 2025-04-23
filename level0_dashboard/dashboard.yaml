@@ -24,16 +24,6 @@ kind: ServiceAccount
 metadata:
   labels:
     k8s-app: kubernetes-dashboard
-  name: admin
-  namespace: kubernetes-dashboard
-
----
-
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  labels:
-    k8s-app: kubernetes-dashboard
   name: kubernetes-dashboard
   namespace: kubernetes-dashboard
 
