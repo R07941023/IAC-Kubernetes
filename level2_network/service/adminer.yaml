@@ -4,12 +4,10 @@ metadata:
   name: adminer
   namespace: infra-net
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-  - name: 8080-tcp  # port setting
-    protocol: TCP
-    port: 8080  # service port
-    targetPort: 8080  # container port
-    nodePort: 30830 # node port
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
   selector:
     app: adminer
