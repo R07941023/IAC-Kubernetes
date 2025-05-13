@@ -11,9 +11,21 @@ spec:
   tls:
     - hosts:
         - grafana.mydormroom.com
+        - grafana.mydormroom.dpdns.org
       secretName: mydormroom-tls
   rules:
     - host: grafana.mydormroom.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+  rules:
+    - host: grafana.mydormroom.dpdns.org
       http:
         paths:
           - path: /

@@ -11,9 +11,20 @@ spec:
   tls:
     - hosts:
         - open-webui.mydormroom.com
+        - open-webui.mydormroom.dpdns.org
       secretName: mydormroom-tls
   rules:
     - host: open-webui.mydormroom.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: open-webui
+                port:
+                  number: 8080
+    - host: open-webui.mydormroom.dpdns.org
       http:
         paths:
           - path: /
