@@ -5,7 +5,7 @@ metadata:
   namespace: infra-net
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP" 
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: nginx
   tls:
@@ -24,7 +24,6 @@ spec:
                 name: grafana
                 port:
                   number: 3000
-  rules:
     - host: grafana.mydormroom.dpdns.org
       http:
         paths:
