@@ -11,9 +11,20 @@ spec:
   tls:
     - hosts:
         - adminer.mydormroom.com
+        - adminer.mydormroom.dpdns.org
       secretName: mydormroom-tls
   rules:
     - host: adminer.mydormroom.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: adminer
+                port:
+                  number: 8080
+    - host: adminer.mydormroom.dpdns.org
       http:
         paths:
           - path: /
