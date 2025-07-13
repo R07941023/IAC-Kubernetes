@@ -1,0 +1,33 @@
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: n8n-data-pv  # storage name
+spec:
+  storageClassName: n8n-data-pv
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/run/desktop/mnt/host/e/n8n"
+    type: "DirectoryOrCreate"
+  persistentVolumeReclaimPolicy: Retain
+---
+
+
+# Deploy pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: n8n-data-pvc  # storage name
+  namespace: app  # namespace name
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: n8n-data-pv

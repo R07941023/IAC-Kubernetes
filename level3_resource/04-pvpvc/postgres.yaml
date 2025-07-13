@@ -1,0 +1,31 @@
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-data-pv  # storage name
+spec:
+  storageClassName: postgres-data-pv
+  capacity:
+    storage: 30Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/run/desktop/mnt/host/e/postgres"
+    type: "DirectoryOrCreate"
+  persistentVolumeReclaimPolicy: Retain
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-pvc
+  namespace: infra-net
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: postgres-data-pv
