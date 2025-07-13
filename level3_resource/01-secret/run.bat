@@ -23,12 +23,18 @@ echo "[Start] namespace: argocd"
 kubectl create -n argocd secret tls mydormroom-tls --cert=mydormroom.crt --key=mydormroom.key --save-config --dry-run=client -o yaml > temp-secret.yaml
 kubectl apply -f temp-secret.yaml
 del temp-secret.yaml
-echo "[End] namespace: argocd
+echo "[End] namespace: argocd"
 
 echo "[Start] namespace: ai"
 kubectl create -n ai secret tls mydormroom-tls --cert=mydormroom.crt --key=mydormroom.key --save-config --dry-run=client -o yaml > temp-secret.yaml
 kubectl apply -f temp-secret.yaml
 del temp-secret.yaml
-echo "[End] namespace: ai
+echo "[End] namespace: ai"
+
+echo "[Start] namespace: app
+kubectl create -n app secret tls mydormroom-tls --cert=mydormroom.crt --key=mydormroom.key --save-config --dry-run=client -o yaml > temp-secret.yaml
+kubectl apply -f temp-secret.yaml
+del temp-secret.yaml
+echo "[End] namespace: app"
 
 pause
