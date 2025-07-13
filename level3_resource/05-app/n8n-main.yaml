@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n8n
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: n8n
+  template:
+    metadata:
+      labels:
+        app: n8n
+    spec:
+      containers:
+        - name: n8n
+          image: n8nio/n8n
+          ports:
+            - containerPort: 5678
+          env:
+            - name: N8N_HOST
+              value: n8n.mydormroom.dpdns.org
+            - name: WEBHOOK_URL
+              value: https://n8n.mydormroom.dpdns.org/
+            - name: N8N_PORT
+              value: "5678"
+            - name: GENERIC_TIMEZONE
+              value: Asia/Taipei
+            - name: TZ
+              value: Asia/Taipei
+            - name: N8N_BASIC_AUTH_ACTIVE
+              value: "true"
+            - name: N8N_USER_MANAGEMENT_DISABLED
+              value: "true"
+            - name: N8N_BASIC_AUTH_USER
+              value: n8n
+            - name: N8N_BASIC_AUTH_PASSWORD
+              value: ji3g4n8n
+            - name: N8N_RUNNERS_ENABLED
+              value: "true"
+          volumeMounts:
+            - name: n8n-volume
+              mountPath: /home/node/.n8n
+      volumes:
+        - name: n8n-volume
+          persistentVolumeClaim:
+            claimName: n8n-data-pvc

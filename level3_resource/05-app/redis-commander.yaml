@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-commander
+  namespace: infra-net
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-commander
+  template:
+    metadata:
+      labels:
+        app: redis-commander
+    spec:
+      containers:
+      - name: redis-commander
+        image: rediscommander/redis-commander:latest
+        env:
+        - name: REDIS_HOSTS
+          value: "redis"
+        ports:
+        - containerPort: 8081
