@@ -16,19 +16,46 @@ spec:
       containers:
         - name: n8n
           image: n8nio/n8n
+          command: ["n8n"]
+          args: ["worker"]
           env:
+            # worker
             - name: N8N_RUNNERS_ENABLED
               value: "true"
-            - name: N8N_HOST
-              value: n8n.mydormroom.dpdns.org
-            - name: GENERIC_TIMEZONE
-              value: Asia/Taipei
-            - name: TZ
-              value: Asia/Taipei
-          volumeMounts:
-            - name: n8n-volume
-              mountPath: /home/node/.n8n
-      volumes:
-        - name: n8n-volume
-          persistentVolumeClaim:
-            claimName: n8n-data-pvc
+            - name: EXECUTIONS_MODE
+              value: "queue"
+            - name: N8N_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: N8N_ENCRYPTION_KEY
+            # redis
+            - name: QUEUE_MODE_ENABLED
+              value: "true"
+            - name: QUEUE_BULL_REDIS_HOST
+              value: redis.infra-net.svc.cluster.local
+            - name: QUEUE_BULL_REDIS_PORT
+              value: "6379"
+            - name: QUEUE_BULL_REDIS_DB
+              value: "0"
+            - name: QUEUE_BULL_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: REDIS_PASSWORD
+            # db
+            - name: DB_TYPE
+              value: postgresdb
+            - name: DB_POSTGRESDB_HOST
+              value: postgres.infra-net.svc.cluster.local
+            - name: DB_POSTGRESDB_PORT
+              value: "5432"
+            - name: DB_POSTGRESDB_DATABASE
+              value: n8n
+            - name: DB_POSTGRESDB_USER
+              value: postgres
+            - name: DB_POSTGRESDB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: POSTGRES_PASSWORD

@@ -35,6 +35,9 @@ echo "[Start] namespace: app
 kubectl create -n app secret tls mydormroom-tls --cert=mydormroom.crt --key=mydormroom.key --save-config --dry-run=client -o yaml > temp-secret.yaml
 kubectl apply -f temp-secret.yaml
 del temp-secret.yaml
+kubectl create -n app secret generic keyvault --from-env-file=secret_app.ini --dry-run=client -o yaml > temp-secret.yaml
+kubectl apply -f temp-secret.yaml
+del temp-secret.yaml
 echo "[End] namespace: app"
 
 pause
