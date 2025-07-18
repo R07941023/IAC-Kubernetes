@@ -30,6 +30,9 @@ spec:
               value: "false"
             - name: OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS
               value: "true"
+            # node
+            - name: N8N_CUSTOM_EXTENSIONS
+              value: /home/node/.n8n/custom
             # ui
             - name: N8N_HOST
               value: n8n.mydormroom.dpdns.org

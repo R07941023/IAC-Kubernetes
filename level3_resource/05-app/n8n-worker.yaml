@@ -29,6 +29,9 @@ spec:
                 secretKeyRef:
                   name: keyvault
                   key: N8N_ENCRYPTION_KEY
+            # node
+            - name: N8N_CUSTOM_EXTENSIONS
+              value: /home/node/.n8n/custom
             # redis
             - name: QUEUE_MODE_ENABLED
               value: "true"
