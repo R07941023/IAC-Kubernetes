@@ -16,8 +16,5 @@ spec:
       containers:
       - name: redis-commander
         image: rediscommander/redis-commander:latest
-        env:
-        - name: REDIS_HOSTS
-          value: "redis"
         ports:
         - containerPort: 8081
