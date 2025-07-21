@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+  namespace: infra-net
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-express
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+    spec:
+      containers:
+      - name: mongo-express
+        image: mongo-express:latest
+        ports:
+        - containerPort: 8081
+        env:
+        - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+          value: "admin"
+        - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keyvault
+              key: MONGO_INITDB_ROOT_PASSWORD
+        - name: ME_CONFIG_MONGODB_SERVER
+          value: "mongodb"
+        - name: ME_CONFIG_OPTIONS_SSL
+          value: "false"
+        - name: ME_CONFIG_BASICAUTH_USERNAME
+          value: "mongodb"         
+        - name: ME_CONFIG_BASICAUTH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keyvault
+              key: MONGO_INITDB_ROOT_PASSWORD
