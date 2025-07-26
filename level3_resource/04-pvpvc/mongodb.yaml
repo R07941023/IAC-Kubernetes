@@ -21,9 +21,9 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  nfs:
-    path: "/volume1/backend/storage/mongodb/0"
-    server: 192.168.100.145  # homeNAS
+  hostPath:
+    path: "/run/desktop/mnt/host/e/mongodb/0"
+    type: "DirectoryOrCreate"
   persistentVolumeReclaimPolicy: Retain
 
 ---
@@ -42,9 +42,9 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  nfs:
-    path: "/volume1/backend/storage/mongodb/1"
-    server: 192.168.100.145  # homeNAS
+  hostPath:
+    path: "/run/desktop/mnt/host/e/mongodb/1"
+    type: "DirectoryOrCreate"
   persistentVolumeReclaimPolicy: Retain
 
 ---
@@ -63,9 +63,9 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  nfs:
-    path: "/volume1/backend/storage/mongodb/2"
-    server: 192.168.100.145  # homeNAS
+  hostPath:
+    path: "/run/desktop/mnt/host/e/mongodb/2"
+    type: "DirectoryOrCreate"
   persistentVolumeReclaimPolicy: Retain
 
 

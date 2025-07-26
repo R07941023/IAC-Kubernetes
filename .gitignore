@@ -3,3 +3,4 @@ level3_resource/01-secret/secret_game.ini
 level3_resource/01-secret/secret_infra_net.ini
 level3_resource/01-secret/secret_argocd.ini
 level3_resource/01-secret/secret_app.ini
+level3_resource/01-secret/mongodb-keyfile.txt

@@ -1,10 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-headless
+  namespace: infra-net
+spec:
+  clusterIP: None
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+---
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongodb
   namespace: infra-net
 spec:
-  serviceName: "mongodb"
+  serviceName: "mongodb-headless"
   replicas: 3
   selector:
     matchLabels:
@@ -17,14 +31,21 @@ spec:
       containers:
       - name: mongodb
         image: mongo:6.0
+        command: ["mongod"]
+        args:
+          - "--replSet"
+          - "rs0"
+          - "--bind_ip_all"
         securityContext:
           privileged: true
-          runAsUser: 1024
         ports:
         - containerPort: 27017
         volumeMounts:
         - name: mongodb-data
           mountPath: /data/db
+        - name: mongodb-keyfile
+          mountPath: /etc/secrets
+          readOnly: true
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           value: "admin"
@@ -33,6 +54,11 @@ spec:
             secretKeyRef:
               name: keyvault
               key: MONGO_INITDB_ROOT_PASSWORD
+      volumes:
+      - name: mongodb-keyfile
+        secret:
+          secretName: mongodb-keyfile
+          defaultMode: 0600
   volumeClaimTemplates:
   - metadata:
       name: mongodb-data
@@ -41,4 +67,4 @@ spec:
       storageClassName: mongodb-sc
       resources:
         requests:
-          storage: 5Gi
+          storage: 30Gi
