@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: konga
+  namespace: app
+spec:
+  selector:
+    app: konga
+  type: ClusterIP
+  ports:
+    - port: 1337
+      targetPort: 1337
+      protocol: TCP

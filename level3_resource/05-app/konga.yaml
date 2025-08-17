@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: konga
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: konga
+  template:
+    metadata:
+      labels:
+        app: konga
+    spec:
+      containers:
+        - name: konga
+          image: pantsel/konga:next
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: TOKEN_SECRET
+              value: "kongatoken"
+          ports:
+            - containerPort: 1337
