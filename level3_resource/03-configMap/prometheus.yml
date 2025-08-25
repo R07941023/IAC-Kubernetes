@@ -14,7 +14,7 @@ scrape_configs:
   
   - job_name: 'kube-state-metrics'
     static_configs:
-      - targets: ['kube-state-metrics.default.svc.cluster.local:8080']
+      - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
 
   - job_name: 'gpu'
     scrape_interval: 5s
@@ -22,3 +22,21 @@ scrape_configs:
       - targets: ['host.docker.internal:9400']
         labels:
           instance: 'mydormroom'
+          
+  - job_name: 'kubelet-cadvisor'
+    scheme: https
+    metrics_path: /metrics/cadvisor
+    tls_config:
+      insecure_skip_verify: true
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    kubernetes_sd_configs:
+      - role: node
+    relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor

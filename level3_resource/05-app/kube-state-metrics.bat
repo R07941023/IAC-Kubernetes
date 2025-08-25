@@ -1,0 +1,1 @@
+kubectl apply -k https://github.com/kubernetes/kube-state-metrics/examples/standard

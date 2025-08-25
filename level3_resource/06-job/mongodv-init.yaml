@@ -1,0 +1,46 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongodb-init-replicaset
+  namespace: infra-net
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      containers:
+      - name: init
+        image: mongo:6.0
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: "admin"
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keyvault
+              key: MONGO_INITDB_ROOT_PASSWORD
+        command:
+        - bash
+        - -c
+        - |
+          echo "Wait mongodb-0 service start..."
+          until mongosh --host mongodb-0.mongodb-headless.infra-net.svc.cluster.local:27017 --eval 'db.adminCommand("ping")' | grep 'ok'; do
+            echo "$(date) - mongodb-0 not ready，keep wait for 5 second"
+            sleep 5
+          done
+
+          echo "Init Replica Set..."
+          mongosh --host mongodb-0.mongodb-headless.infra-net.svc.cluster.local <<EOF
+          rs.initiate({
+            _id: "rs0",
+            members: [
+              { _id: 0, host: "mongodb-0.mongodb-headless.infra-net.svc.cluster.local:27017" },
+              { _id: 1, host: "mongodb-1.mongodb-headless.infra-net.svc.cluster.local:27017" },
+              { _id: 2, host: "mongodb-2.mongodb-headless.infra-net.svc.cluster.local:27017" }
+            ]
+          })
+
+          EOF
+          echo "Replica Set Init Success"
+
+      restartPolicy: OnFailure

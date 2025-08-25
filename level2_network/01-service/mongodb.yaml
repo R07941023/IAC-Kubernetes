@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-0
+  namespace: infra-net
+spec:
+  type: NodePort
+  selector:
+    statefulset.kubernetes.io/pod-name: mongodb-0
+  ports:
+    - name: mongo-0
+      port: 27017
+      targetPort: 27017
+      nodePort: 30370
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-1
+  namespace: infra-net
+spec:
+  type: NodePort
+  selector:
+    statefulset.kubernetes.io/pod-name: mongodb-1
+  ports:
+    - name: mongo-0
+      port: 27017
+      targetPort: 27017
+      nodePort: 30371
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-2
+  namespace: infra-net
+spec:
+  type: NodePort
+  selector:
+    statefulset.kubernetes.io/pod-name: mongodb-2
+  ports:
+    - name: mongo-0
+      port: 27017
+      targetPort: 27017
+      nodePort: 30372
+

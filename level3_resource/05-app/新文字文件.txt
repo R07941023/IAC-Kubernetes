@@ -1,0 +1,12 @@
+helm install kibana elastic/kibana -n logging --set service.type=NodePort
+kubectl get secrets --namespace=logging kibana-kibana-es-token -ojsonpath='{.data.token}'
+
+
+
+kubectl delete role pre-install-kibana-kibana -n logging
+kubectl delete secret sh.helm.release.v1.kibana.v1 -n logging
+kubectl delete configMap kibana-kibana-helm-scripts -n logging
+kubectl delete serviceaccount pre-install-kibana-kibana -n logging
+kubectl delete role pre-install-kibana-kibana -n logging
+kubectl delete rolebinding pre-install-kibana-kibana -n logging
+helm install kibana elastic/kibana -n logging --set service.type=NodePort

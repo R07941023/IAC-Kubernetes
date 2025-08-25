@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-commander
+  namespace: infra-net
+spec:
+  selector:
+    app: redis-commander
+  ports:
+    - port: 8081

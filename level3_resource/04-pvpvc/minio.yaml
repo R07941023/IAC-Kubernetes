@@ -1,0 +1,91 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: minio-sc
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv-0  # storage name
+spec:
+  storageClassName: minio-sc
+  claimRef:
+    namespace: infra-net
+    name: minio-data-minio-0
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: "/volume1/backend/storage/minio/0"
+    server: 192.168.100.145  # homeNAS
+  persistentVolumeReclaimPolicy: Retain
+
+---
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv-1  # storage name
+spec:
+  storageClassName: minio-sc
+  claimRef:
+    namespace: infra-net
+    name: minio-data-minio-1
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: "/volume1/backend/storage/minio/1"
+    server: 192.168.100.145  # homeNAS
+  persistentVolumeReclaimPolicy: Retain
+
+---
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv-2  # storage name
+spec:
+  storageClassName: minio-sc
+  claimRef:
+    namespace: infra-net
+    name: minio-data-minio-2
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: "/volume1/backend/storage/minio/2"
+    server: 192.168.100.145  # homeNAS
+  persistentVolumeReclaimPolicy: Retain
+
+---
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv-3  # storage name
+spec:
+  storageClassName: minio-sc
+  claimRef:
+    namespace: infra-net
+    name: minio-data-minio-3
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: "/volume1/backend/storage/minio/3"
+    server: 192.168.100.145  # homeNAS
+  persistentVolumeReclaimPolicy: Retain
+

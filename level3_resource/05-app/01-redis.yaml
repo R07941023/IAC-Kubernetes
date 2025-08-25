@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: infra-net
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: REDIS_PASSWORD
+          command: ["sh", "-c"]
+          args:
+            - exec redis-server --requirepass "$REDIS_PASSWORD"
+          ports:
+            - containerPort: 6379
