@@ -61,7 +61,7 @@ spec:
       name: etcd-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: minio-sc
+      storageClassName: etcd-sc
       resources:
         requests:
           storage: 5Gi
