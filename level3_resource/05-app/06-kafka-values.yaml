@@ -1,0 +1,54 @@
+# deploy
+# helm install kafka bitnami/kafka -f kafka-values.yaml
+# helm upgrade --install kafka bitnami/kafka -n infra-net -f 06-kafka-values.yaml
+
+# testing connection on kafka broker0
+# kafka-broker-api-versions.sh --bootstrap-server localhost:9092
+
+namespaceOverride: infra-net
+
+replicaCount: 3
+
+kraft:
+  enabled: true
+zookeeper:
+  enabled: false
+
+persistence:
+  enabled: true
+  storageClass: hostpath
+  size: 10Gi
+
+listeners:
+  client:
+    protocol: PLAINTEXT
+    name: CLIENT           
+    containerPort: 9092    
+  external:
+    enabled: true          
+    protocol: PLAINTEXT
+    name: EXTERNAL
+    containerPort: 9095    
+  interbroker:
+    protocol: PLAINTEXT
+    name: INTERNAL
+    containerPort: 9094    
+
+headless:
+  create: true
+  
+metrics:
+  kafka:
+    enabled: true
+
+externalAccess:
+  enabled: true
+  controller:
+    service:
+      type: NodePort
+      useHostIPs: true
+      targetPort: 9095
+      nodePorts:
+        - 30840
+        - 30841
+        - 30842
