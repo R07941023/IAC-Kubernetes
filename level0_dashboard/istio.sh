@@ -1,0 +1,17 @@
+export ISTIO_VERSION="1.27.3"
+export ISTIO_ARCH="x86_64"
+export ISTIO_DIR="/tmp/istio-$ISTIO_VERSION" 
+
+echo "--- download istio cli"
+curl -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION TARGET_ARCH=$ISTIO_ARCH sh -
+export PATH=$PWD/bin:$PATH
+istioctl version
+
+echo "--- install istio controller plane for default ---"
+istioctl install --set profile=default -y
+kubectl get pods -n istio-system
+
+echo "--- install plugin ---"
+kubectl apply -f samples/addons
+echo "--- watting for success ---"
+kubectl rollout status deployment/kiali -n istio-system

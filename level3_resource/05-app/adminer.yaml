@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: adminer
-          image: adminer:4.6.3
+          image: adminer:5.3.0
           resources:
             requests:
               memory: "64Mi"
