@@ -45,4 +45,10 @@ kubectl apply -f temp-secret.yaml
 del temp-secret.yaml
 echo "[End] namespace: app"
 
+echo "[Start] namespace: istio-system"
+kubectl create -n istio-system secret tls mydormroom-tls --cert=mydormroom.crt --key=mydormroom.key --save-config --dry-run=client -o yaml > temp-secret.yaml
+kubectl apply -f temp-secret.yaml
+del temp-secret.yaml
+echo "[End] namespace: istio-system"
+
 pause
