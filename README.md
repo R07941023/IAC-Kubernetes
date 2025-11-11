@@ -2,7 +2,18 @@
 
 ![architecture](./images/architecture.jpg)
 
-This repository provides a comprehensive set of examples for setting up a Kubernetes environment using an Infrastructure as Code (IaC) approach. Whether you are a beginner or an experienced developer, you can find the various configuration files needed to deploy and manage modern applications here.
+This repository provides a comprehensive set of examples for setting up a Kubernetes environment using an Infrastructure as Code (IaC) approach. Whether you are a beginner or an experienced developer, you can find the various configuration files needed to deploy and manage modern applications here.  
+[Live Demo for Dashboard](https://dashboard.mydormroom.dpdns.org/)  
+[Live Demo for Tracing](https://kiali.mydormroom.dpdns.org/)  
+[Live Demo for Postgresql](https://adminer.mydormroom.dpdns.org/)  
+[Live Demo for Minio](https://minio.mydormroom.dpdns.org/)  
+[Live Demo for Argocd](https://argocd.mydormroom.dpdns.org/)  
+[Live Demo for Redis](https://redis-commander.mydormroom.dpdns.org/)  
+[Live Demo for Kafka](https://kafka-ui.mydormroom.dpdns.org/)  
+[Live Demo for Mongo](https://mongo-express.mydormroom.dpdns.org/)  
+[Live Demo for Kong](https://konga.mydormroom.dpdns.org/)  
+[Live Demo for Keycloak](https://keycloak.mydormroom.dpdns.org/)  
+[Live Demo for N8N](https://n8n.mydormroom.dpdns.org/)  
 
 ## Foundational Components
 
@@ -73,3 +84,18 @@ A high-performance in-memory data structure store, used as a database, cache, an
 A document-based NoSQL database suitable for applications requiring high scalability and flexibility.
 
 ![mongodb](./images/mongodb.jpg)
+
+### **Kong**
+An open-source API gateway and microservice management layer that provides features such as load balancing, authentication, rate limiting, and logging. It helps manage, secure, and monitor API traffic efficiently.
+
+![kong](./images/kong.jpg)
+
+### **Keycloak**
+An open-source identity and access management solution that supports Single Sign-On (SSO), OAuth2, OpenID Connect, and SAML. It allows secure user authentication and centralized authorization across multiple services.
+
+![keycloak](./images/keycloak.jpg)
+
+### **n8n**
+A workflow automation tool that enables connecting different services and automating tasks with a visual interface. It supports custom logic, condition handling, and integrations with APIs, databases, and message queues.
+
+![n8n](./images/n8n.jpg)
