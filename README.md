@@ -10,6 +10,7 @@ This repository provides a comprehensive set of examples for setting up a Kubern
 [Live Demo for Argocd](https://argocd.mydormroom.dpdns.org/)  
 [Live Demo for Redis](https://redis-commander.mydormroom.dpdns.org/)  
 [Live Demo for Kafka](https://kafka-ui.mydormroom.dpdns.org/)  
+[Live Demo for Cassandra](https://cassandra-web.mydormroom.dpdns.org/)  
 [Live Demo for Mongo](https://mongo-express.mydormroom.dpdns.org/)  
 [Live Demo for Kong](https://konga.mydormroom.dpdns.org/)  
 [Live Demo for Keycloak](https://keycloak.mydormroom.dpdns.org/)  
@@ -85,6 +86,11 @@ A document-based NoSQL database suitable for applications requiring high scalabi
 
 ![mongodb](./images/mongodb.jpg)
 
+### **Cassandra**
+A highly scalable and distributed NoSQL database designed for handling large amounts of data across many commodity servers with no single point of failure. It supports high availability, linear scalability, and a flexible schema, making it suitable for real-time big data applications.
+
+![Cassandra](./images/cassandra.jpg)
+
 ### **Kong**
 An open-source API gateway and microservice management layer that provides features such as load balancing, authentication, rate limiting, and logging. It helps manage, secure, and monitor API traffic efficiently.
 
@@ -95,7 +101,4 @@ An open-source identity and access management solution that supports Single Sign
 
 ![keycloak](./images/keycloak.jpg)
 
-### **n8n**
-A workflow automation tool that enables connecting different services and automating tasks with a visual interface. It supports custom logic, condition handling, and integrations with APIs, databases, and message queues.
 
-![n8n](./images/n8n.jpg)

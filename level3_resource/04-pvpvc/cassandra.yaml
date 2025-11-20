@@ -1,0 +1,71 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cassandra-sc
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cassandra-pv-0  # storage name
+spec:
+  storageClassName: cassandra-sc
+  claimRef:
+    namespace: infra-net
+    name: cassandra-data-cassandra-0
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/run/desktop/mnt/host/e/cassandra/0"
+    type: "DirectoryOrCreate"
+  persistentVolumeReclaimPolicy: Retain
+
+---
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cassandra-pv-1  # storage name
+spec:
+  storageClassName: cassandra-sc
+  claimRef:
+    namespace: infra-net
+    name: cassandra-data-cassandra-1
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/run/desktop/mnt/host/e/cassandra/1"
+    type: "DirectoryOrCreate"
+  persistentVolumeReclaimPolicy: Retain
+
+---
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cassandra-pv-2  # storage name
+spec:
+  storageClassName: cassandra-sc
+  claimRef:
+    namespace: infra-net
+    name: cassandra-data-cassandra-2
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/run/desktop/mnt/host/e/cassandra/2"
+    type: "DirectoryOrCreate"
+  persistentVolumeReclaimPolicy: Retain
+
+

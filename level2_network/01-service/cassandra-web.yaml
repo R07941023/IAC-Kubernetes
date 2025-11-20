@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cassandra-web
+  namespace: infra-net
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      targetPort: 8083
+      protocol: TCP
+  selector:
+    app: cassandra-web
