@@ -1,42 +1,54 @@
-global:
-  scrape_interval: 15s
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus
+  namespace: infra-net
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
 
-scrape_configs:
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']
+    scrape_configs:
+      # Prometheus
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
 
-  - job_name: 'windows_exporter'
-    static_configs:
-      - targets: ['host.docker.internal:9182']
-        labels:
-          instance: 'mydormroom'
-  
-  - job_name: 'kube-state-metrics'
-    static_configs:
-      - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
+      # Windows Exporter
+      - job_name: 'windows_exporter'
+        static_configs:
+          - targets: ['host.docker.internal:9182']
+            labels:
+              instance: 'mydormroom'
+      
+      # Kube-State-Metrics
+      - job_name: 'kube-state-metrics'
+        static_configs:
+          - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
 
-  - job_name: 'gpu'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['host.docker.internal:9400']
-        labels:
-          instance: 'mydormroom'
-          
-  - job_name: 'kubelet-cadvisor'
-    scheme: https
-    metrics_path: /metrics/cadvisor
-    tls_config:
-      insecure_skip_verify: true
-    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-    kubernetes_sd_configs:
-      - role: node
-    relabel_configs:
-      - action: labelmap
-        regex: __meta_kubernetes_node_label_(.+)
-      - target_label: __address__
-        replacement: kubernetes.default.svc:443
-      - source_labels: [__meta_kubernetes_node_name]
-        regex: (.+)
-        target_label: __metrics_path__
-        replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+      # GPU 
+      - job_name: 'gpu'
+        scrape_interval: 5s
+        static_configs:
+          - targets: ['host.docker.internal:9400']
+            labels:
+              instance: 'mydormroom'
+              
+      # Kubelet cAdvisor 
+      - job_name: 'kubelet-cadvisor'
+        scheme: https
+        metrics_path: /metrics/cadvisor
+        tls_config:
+          insecure_skip_verify: true
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        kubernetes_sd_configs:
+          - role: node
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - target_label: __address__
+            replacement: kubernetes.default.svc:443
+          - source_labels: [__meta_kubernetes_node_name]
+            regex: (.+)
+            target_label: __metrics_path__
+            replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
