@@ -1,3 +1,5 @@
+# load 12117 
+# connect prometheus
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,3 +31,23 @@ spec:
                 secretKeyRef:
                   name: keyvault
                   key: GRAFANA_PASSWORD
+          volumeMounts:
+          - name: grafana-datasources
+            mountPath: /etc/grafana/provisioning/datasources
+            readOnly: true
+          - name: grafana-dashboard-provisioning
+            mountPath: /etc/grafana/provisioning/dashboards
+            readOnly: true
+          - name: grafana-dashboards
+            mountPath: /var/lib/grafana/dashboards
+            readOnly: true
+      volumes:
+        - name: grafana-datasources
+          configMap:
+            name: grafana-datasources
+        - name: grafana-dashboard-provisioning
+          configMap:
+            name: grafana-dashboard-provisioning
+        - name: grafana-dashboards
+          configMap:
+            name: grafana-dashboards

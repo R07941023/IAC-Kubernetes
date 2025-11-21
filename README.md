@@ -4,6 +4,7 @@
 
 This repository provides a comprehensive set of examples for setting up a Kubernetes environment using an Infrastructure as Code (IaC) approach. Whether you are a beginner or an experienced developer, you can find the various configuration files needed to deploy and manage modern applications here.  
 [Live Demo for Dashboard](https://dashboard.mydormroom.dpdns.org/)  
+[Live Demo for Matrics](https://grafana.mydormroom.dpdns.org/)  
 [Live Demo for Tracing](https://kiali.mydormroom.dpdns.org/)  
 [Live Demo for Postgresql](https://adminer.mydormroom.dpdns.org/)  
 [Live Demo for Minio](https://minio.mydormroom.dpdns.org/)  
@@ -37,6 +38,8 @@ In a microservices architecture, tracing the full path of a request is essential
 - **Kiali**: A visualization tool for service meshes, capable of displaying service topology, monitoring traffic, and analyzing trace data.
 
 ## Metrics & Monitoring
+
+![grafana](./images/grafana.jpg)
 
 To ensure system stability and performance, this project integrates a powerful monitoring stack.
 
