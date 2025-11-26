@@ -5,6 +5,7 @@
 This repository provides a comprehensive set of examples for setting up a Kubernetes environment using an Infrastructure as Code (IaC) approach. Whether you are a beginner or an experienced developer, you can find the various configuration files needed to deploy and manage modern applications here.  
 [Live Demo for Dashboard](https://dashboard.mydormroom.dpdns.org/)  
 [Live Demo for Matrics](https://grafana.mydormroom.dpdns.org/)  
+[Live Demo for Logging](https://kibana.mydormroom.dpdns.org/) 
 [Live Demo for Tracing](https://kiali.mydormroom.dpdns.org/)  
 [Live Demo for Postgresql](https://adminer.mydormroom.dpdns.org/)  
 [Live Demo for Minio](https://minio.mydormroom.dpdns.org/)  
@@ -48,6 +49,12 @@ To ensure system stability and performance, this project integrates a powerful m
 - **Grafana**: A powerful visualization platform that can transform metrics data collected by Prometheus into easy-to-understand dashboards.
 
 ## Logging
+
+![elk](./images/elk.jpg)
+
+```bash
+kubectl get secret es-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}'
+```
 
 Centralized log management is crucial for troubleshooting and behavior analysis. We adopt the widely-used ELK Stack.
 
