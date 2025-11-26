@@ -1,0 +1,17 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: es
+  namespace: logging
+spec:
+  version: 8.13.2
+  nodeSets:
+  - name: default
+    count: 3
+    config:
+      node.store.allow_mmap: false
+      xpack.security.enabled: true
+    podTemplate:
+      spec:
+        securityContext:
+          runAsUser: 1000 # operator permission

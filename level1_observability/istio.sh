@@ -20,3 +20,6 @@ echo "--- install plugin ---"
 kubectl apply -f samples/addons
 echo "--- watting for success ---"
 kubectl rollout status deployment/kiali -n istio-system
+
+echo "---  istio tracing ---"
+kubectl label namespace app istio-injection=enabled --overwrite
