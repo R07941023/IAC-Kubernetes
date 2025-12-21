@@ -38,23 +38,6 @@ In a microservices architecture, tracing the full path of a request is essential
 - **Istio**: A service mesh platform that provides traffic management, security, and observability.
 - **Jaeger**: An open-source, end-to-end distributed tracing system for monitoring and troubleshooting complex microservices-based systems.
 - **Kiali**: A visualization tool for service meshes, capable of displaying service topology, monitoring traffic, and analyzing trace data.
-- **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
-
-## LLM Distributed Tracing
-
-![LLM tracing](./images/langfuse.jpg)
-
-LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts, it ensure AI transparency and cost control.
-
-- **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
-
-## LLM Distributed Tracing
-
-![LLM tracing](./images/langfuse.jpg)
-
-LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts, it ensure AI transparency and cost control.
-
-- **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
 
 ## LLM Distributed Tracing
 
