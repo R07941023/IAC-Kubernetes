@@ -44,7 +44,7 @@ In a microservices architecture, tracing the full path of a request is essential
 
 ![LLM tracing](./images/langfuse.jpg)
 
-LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts,  ensure AI transparency and cost control.
+LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts, it ensure AI transparency and cost control.
 
 - **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
 
