@@ -68,7 +68,7 @@ kubectl get secret es-es-elastic-user -n logging -o go-template='{{.data.elastic
 Centralized log management is crucial for troubleshooting and behavior analysis. We adopt the widely-used ELK Stack.
 
 - **Elasticsearch**: A distributed search and analytics engine for storing and indexing all logs.
-- **Logstash**: A server-side data processing pipeline that can dynamically collect data from various sources, transform it, and send it to Elasticsearch.
+- **Filebeat**: A lightweight log shipper designed to collect logs from servers, containers, and Kubernetes workloads, and forward them to Elasticsearch or Logstash for centralized logging and analysis.
 - **Kibana**: A log visualization and query tool that allows users to easily explore log data in Elasticsearch.
 
 ## Deployed Application
