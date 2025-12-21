@@ -5,8 +5,9 @@
 This repository provides a comprehensive set of examples for setting up a Kubernetes environment using an Infrastructure as Code (IaC) approach. Whether you are a beginner or an experienced developer, you can find the various configuration files needed to deploy and manage modern applications here.  
 [Live Demo for Dashboard](https://dashboard.mydormroom.dpdns.org/)  
 [Live Demo for Matrics](https://grafana.mydormroom.dpdns.org/)  
-[Live Demo for Logging](https://kibana.mydormroom.dpdns.org/) 
-[Live Demo for Tracing](https://kiali.mydormroom.dpdns.org/)  
+[Live Demo for Logging](https://kibana.mydormroom.dpdns.org/)  
+[Live Demo for Service Tracing](https://kiali.mydormroom.dpdns.org/)  
+[Live Demo for LLM Tracing](https://langfuse.mydormroom.dpdns.org/)  
 [Live Demo for Postgresql](https://adminer.mydormroom.dpdns.org/)  
 [Live Demo for Minio](https://minio.mydormroom.dpdns.org/)  
 [Live Demo for Argocd](https://argocd.mydormroom.dpdns.org/)  
@@ -31,7 +32,6 @@ This repository covers the foundational components of a Kubernetes environment. 
 ## Service Distributed Tracing
 
 ![tracing](./images/tracing.jpg)
-![LLM tracing](./images/langfuse.jpg)
 
 In a microservices architecture, tracing the full path of a request is essential for understanding system behavior and debugging.
 
@@ -45,6 +45,14 @@ In a microservices architecture, tracing the full path of a request is essential
 ![LLM tracing](./images/langfuse.jpg)
 
 LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts,  ensure AI transparency and cost control.
+
+- **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
+
+## LLM Distributed Tracing
+
+![LLM tracing](./images/langfuse.jpg)
+
+LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts, it ensure AI transparency and cost control.
 
 - **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
 
