@@ -1,0 +1,77 @@
+# helm install langfuse langfuse/langfuse -n ai -f langfuse-values.yaml
+# helm upgrade langfuse langfuse/langfuse -n ai -f langfuse-values.yaml
+# helm get values langfuse -n ai
+
+langfuse:
+  nextauth:
+    secret:
+      value: test
+    url: https://langfuse.mydormroom.dpdns.org
+  salt:
+    value: test
+  additionalEnv:
+  - name: HOSTNAME
+    value: 0.0.0.0
+  # sso
+  - name: AUTH_DISABLE_USERNAME_PASSWORD
+    value: "true"
+  - name: AUTH_KEYCLOAK_CLIENT_ID
+    value: mydormroom
+  - name: AUTH_KEYCLOAK_ISSUER
+    value: https://keycloak.mydormroom.dpdns.org/realms/mydormroom
+  - name: AUTH_KEYCLOAK_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: keyvault
+        key: LANGFUSE_KEYCLOAK_CLIENT_SECRET
+  # db
+  - name: DATABASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: keyvault
+        key: POSTGRES_CONNECTION_STRING
+  # s3
+  - name: LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: keyvault
+        key: MINIO_ROOT_PASSWORD
+  # redis
+  - name: REDIS_CONNECTION_STRING
+    valueFrom:
+      secretKeyRef:
+        name: keyvault
+        key: REDIS_CONNECTION_STRING
+  
+postgresql:
+  auth:
+    database: null
+    password: null
+    username: null
+  deploy: false
+
+clickhouse:
+  auth:
+    existingSecret: keyvault
+    existingSecretKey: CLICK_HOUSE_PASSWORD
+
+redis:
+  deploy: false
+
+s3:
+  batchExport:
+    accessKeyId:
+      value: minio
+    enabled: true
+  bucket: langfuse
+  deploy: false
+  endpoint: http://minio-nodeport.infra-net.svc.cluster.local:9000
+  eventUpload:
+    accessKeyId:
+      value: minio
+  forcePathStyle: true
+  mediaUpload:
+    accessKeyId:
+      value: minio
+    enabled: true
+  region: us-east-1
