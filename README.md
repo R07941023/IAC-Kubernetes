@@ -28,7 +28,7 @@ kubectl -n kubernetes-dashboard create token admin --duration=8760h
 
 This repository covers the foundational components of a Kubernetes environment. It includes key resources such as Pods, CronJobs, Secrets, ConfigMaps, PersistentVolumes (PV), PersistentVolumeClaims (PVC), Services, and Ingresses, which form the building blocks for deploying applications, managing configuration, handling storage, and exposing services within a cluster.
 
-## Distributed Tracing
+## Service Distributed Tracing
 
 ![tracing](./images/tracing.jpg)
 
@@ -37,6 +37,14 @@ In a microservices architecture, tracing the full path of a request is essential
 - **Istio**: A service mesh platform that provides traffic management, security, and observability.
 - **Jaeger**: An open-source, end-to-end distributed tracing system for monitoring and troubleshooting complex microservices-based systems.
 - **Kiali**: A visualization tool for service meshes, capable of displaying service topology, monitoring traffic, and analyzing trace data.
+
+## LLM Distributed Tracing
+
+![LLM tracing](./images/langfuse.jpg)
+
+LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts,  ensure AI transparency and cost control.
+
+- **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
 
 ## Metrics & Monitoring
 
