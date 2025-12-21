@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: langfuse-ingress
+  namespace: ai
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP" 
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - langfuse.mydormroom.com
+        - langfuse.mydormroom.dpdns.org
+      secretName: mydormroom-tls
+  rules:
+    - host: langfuse.mydormroom.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: langfuse-web
+                port:
+                  number: 3000
+    - host: langfuse.mydormroom.dpdns.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: langfuse-web
+                port:
+                  number: 3000

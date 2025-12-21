@@ -31,12 +31,14 @@ This repository covers the foundational components of a Kubernetes environment. 
 ## Distributed Tracing
 
 ![tracing](./images/tracing.jpg)
+![LLM tracing](./images/langfuse.jpg)
 
 In a microservices architecture, tracing the full path of a request is essential for understanding system behavior and debugging.
 
 - **Istio**: A service mesh platform that provides traffic management, security, and observability.
 - **Jaeger**: An open-source, end-to-end distributed tracing system for monitoring and troubleshooting complex microservices-based systems.
 - **Kiali**: A visualization tool for service meshes, capable of displaying service topology, monitoring traffic, and analyzing trace data.
+- **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
 
 ## Metrics & Monitoring
 
