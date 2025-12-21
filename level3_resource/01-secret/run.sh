@@ -34,6 +34,9 @@ echo "[Start] namespace: ai"
 kubectl create -n ai secret tls mydormroom-tls --cert=mydormroom.crt --key=mydormroom.key --save-config --dry-run=client -o yaml > temp-secret.yaml
 kubectl apply -f temp-secret.yaml
 rm -f temp-secret.yaml
+kubectl create -n ai secret generic keyvault --from-env-file=secret_ai.ini --dry-run=client -o yaml > temp-secret.yaml
+kubectl apply -f temp-secret.yaml
+rm -f temp-secret.yaml
 echo "[End] namespace: ai"
 
 echo "[Start] namespace: app"
