@@ -56,6 +56,14 @@ LLM Distributed Tracing tracks the entire reasoning chain across microservices, 
 
 - **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
 
+## LLM Distributed Tracing
+
+![LLM tracing](./images/langfuse.jpg)
+
+LLM Distributed Tracing tracks the entire reasoning chain across microservices, capturing not only service latency but also prompts, it ensure AI transparency and cost control.
+
+- **Langfuse**: An open-source observability and analytics platform specifically designed for LLM applications.
+
 ## Metrics & Monitoring
 
 ![grafana](./images/grafana.jpg)
