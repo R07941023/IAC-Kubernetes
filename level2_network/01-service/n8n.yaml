@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: n8n
-  namespace: app
+  namespace: ai
 spec:
   type: ClusterIP
   selector:
