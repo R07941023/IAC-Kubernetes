@@ -1,0 +1,159 @@
+# setting
+# https://github.com/ibm/mcp-context-forge/pkgs/container/mcp-context-forge
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-context-forge
+  namespace: ai
+  labels:
+    app: mcp-context-forge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-context-forge
+  template:
+    metadata:
+      labels:
+        app: mcp-context-forge
+    spec:
+      containers:
+        - name: mcp-context-forge
+          image: ghcr.io/ibm/mcp-context-forge:latest
+          ports:
+            - containerPort: 4444
+          env:
+            # database
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: MCP_GATEWAY_POSTGRES_CONNECTION_STRING
+            - name: DB_POOL_SIZE
+              value: "50"
+            - name: DB_MAX_OVERFLOW
+              value: "100"
+            - name: DB_POOL_TIMEOUT
+              value: "30"
+            - name: DB_POOL_RECYCLE
+              value: "300"
+            - name: DB_POOL_PRE_PING
+              value: "false"
+            - name: GUNICORN_WORKERS
+              value: "16"
+            - name: GRANIAN_BACKLOG
+              value: "8192"
+            - name: GRANIAN_BACKPRESSURE
+              value: "2048"
+            - name: GRANIAN_HTTP1_BUFFER_SIZE
+              value: "524288"
+            - name: GRANIAN_WORKERS
+              value: "16"
+            # redis
+            - name: CACHE_TYPE
+              value: "redis"
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: REDIS_CONNECTION_STRING
+            - name: REDIS_PARSER
+              value: "hiredis"
+            - name: REDIS_MAX_CONNECTIONS
+              value: "150"
+            - name: REDIS_SOCKET_TIMEOUT
+              value: "5.0"
+            - name: REDIS_SOCKET_CONNECT_TIMEOUT
+              value: "5.0"
+            - name: REDIS_HEALTH_CHECK_INTERVAL
+              value: "30"
+            # server
+            - name: HOST
+              value: 0.0.0.0
+            - name: HTTP_SERVER
+              value: "gunicorn"
+            - name: TRANSPORT_TYPE
+              value: "streamablehttp"
+            - name: JWT_ALGORITHM
+              value: "HS256"
+            - name: JWT_SECRET_KEY
+              value: "mcpgateway"
+            - name: JWT_AUDIENCE
+              value: "mcpgateway-api"
+            - name: JWT_ISSUER
+              value: "mcpgateway"
+            - name: HEALTH_CHECK_INTERVAL
+              value: "300"
+            - name: HEALTH_CHECK_TIMEOUT
+              value: "5"
+            - name: UNHEALTHY_THRESHOLD
+              value: "3"
+            - name: GATEWAY_VALIDATION_TIMEOUT
+              value: "5"
+            - name: MAX_CONCURRENT_HEALTH_CHECKS
+              value: "10"
+            - name: TOOL_TIMEOUT
+              value: "30"
+            - name: FEDERATION_TIMEOUT
+              value: "30"
+            - name: REQUIRE_TOKEN_EXPIRATION
+              value: "false"
+            - name: MCPGATEWAY_ADMIN_API_ENABLED
+              value: "true"
+            - name: AUTH_REQUIRED
+              value: "true"
+            - name: MCP_CLIENT_AUTH_ENABLED
+              value: "true"
+            - name: TRUST_PROXY_AUTH
+              value: "false"
+            - name: SECURITY_HEADERS_ENABLED
+              value: "true"
+            - name: CORS_ALLOW_CREDENTIALS
+              value: "true"
+            - name: SECURE_COOKIES
+              value: "false"
+            - name: PLUGINS_ENABLED
+              value: "true"
+            - name: COMPRESSION_ENABLED
+              value: "false"
+            - name: VALIDATION_MIDDLEWARE_ENABLED
+              value: "true"
+            - name: CORRELATION_ID_ENABLED
+              value: "false"
+            - name: OBSERVABILITY_ENABLED
+              value: "false"
+            - name: MCPGATEWAY_CATALOG_ENABLED
+              value: "true"
+            - name: MCPGATEWAY_CATALOG_FILE
+              value: "/app/mcp-catalog.yml"
+            - name: LOG_LEVEL
+              value: "ERROR"
+            - name: DISABLE_ACCESS_LOG
+              value: "true"
+            - name: STRUCTURED_LOGGING_DATABASE_ENABLED
+              value: "false"
+            - name: SECURITY_LOGGING_ENABLED
+              value: "false"
+            - name: SECURITY_LOGGING_LEVEL
+              value: "failures_only"
+            # UI
+            - name: EMAIL_AUTH_ENABLED
+              value: "true"
+            - name: MCPGATEWAY_UI_ENABLED
+              value: "true"
+            - name: PLATFORM_ADMIN_EMAIL
+              value: "mcpgateway@mydormroom.com"
+            - name: PLATFORM_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: MCP_GATEWAY_PASSWORD
+
+            
+
+            
+
+            
+            
+
+            
