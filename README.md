@@ -7,6 +7,7 @@ This repository provides a comprehensive set of examples for setting up a Kubern
 [Live Demo for Matrics](https://grafana.mydormroom.dpdns.org/)  
 [Live Demo for Logging](https://kibana.mydormroom.dpdns.org/)  
 [Live Demo for Service Tracing](https://kiali.mydormroom.dpdns.org/)  
+[Live Demo for LLM Gateway](https://litellm.mydormroom.dpdns.org/)  
 [Live Demo for LLM Tracing](https://langfuse.mydormroom.dpdns.org/)  
 [Live Demo for Postgresql](https://adminer.mydormroom.dpdns.org/)  
 [Live Demo for Minio](https://minio.mydormroom.dpdns.org/)  
@@ -70,6 +71,16 @@ Centralized log management is crucial for troubleshooting and behavior analysis.
 - **Elasticsearch**: A distributed search and analytics engine for storing and indexing all logs.
 - **Filebeat**: A lightweight log shipper designed to collect logs from servers, containers, and Kubernetes workloads, and forward them to Elasticsearch or Logstash for centralized logging and analysis.
 - **Kibana**: A log visualization and query tool that allows users to easily explore log data in Elasticsearch.
+
+## Gateway
+
+This repository also includes common gateway, which you can use directly or as a reference for your own applications.
+
+### **Litellm**
+
+An LLM Gateway is a middleware layer that sits between applications and large language model providers such as OpenAI, Anthropic, or Ollama. It provides a unified API, handles authentication and access control, manages traffic and rate-limits, logs usage, routes requests across different models, and tracks costs. By centralizing these functions, an LLM Gateway makes it easier for developers and organizations to switch models, improve reliability, and manage security and operations more effectively.
+
+![LLM gateway](./images/litellm.jpg)
 
 ## Deployed Application
 

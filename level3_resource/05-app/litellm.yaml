@@ -1,0 +1,68 @@
+# All  setting
+# https://docs.litellm.ai/docs/proxy/config_settings
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litellm
+  namespace: ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: litellm
+  template:
+    metadata:
+      labels:
+        app: litellm
+    spec:
+      containers:
+        - name: litellm-container
+          image: docker.litellm.ai/berriai/litellm:main-stable
+          imagePullPolicy: Always
+          env:
+            - name: STORE_MODEL_IN_DB
+              value: "true"
+            - name: UI_USERNAME
+              value: "litellm"
+            - name: UI_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: LITELLM_PASSWORD
+            - name: LITELLM_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: LITELLM_MASTER_KEY
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: LITELLM_POSTGRES_CONNECTION_STRING
+            - name: REDIS_HOST
+              value: redis.infra-net.svc.cluster.local
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault
+                  key: REDIS_PASSWORD
+          livenessProbe:
+            httpGet:
+              path: /health/liveliness
+              port: 4000
+            initialDelaySeconds: 120
+            periodSeconds: 15
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 4000
+            initialDelaySeconds: 120
+            periodSeconds: 15
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 10
