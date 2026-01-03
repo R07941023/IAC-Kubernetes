@@ -1,36 +1,36 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: n8n-ingress
+  name: litellm-ingress
   namespace: ai
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP" 
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - n8n.mydormroom.com
-        - n8n.mydormroom.dpdns.org
+        - litellm.mydormroom.com
+        - litellm.mydormroom.dpdns.org
       secretName: mydormroom-tls
   rules:
-    - host: n8n.mydormroom.com
+    - host: litellm.mydormroom.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: n8n
+                name: litellm
                 port:
-                  number: 5678
-    - host: n8n.mydormroom.dpdns.org
+                  number: 4000
+    - host: litellm.mydormroom.dpdns.org
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: n8n
+                name: litellm
                 port:
-                  number: 5678
+                  number: 4000

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: litellm
+  namespace: ai
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4000
+      targetPort: 4000
+      protocol: TCP
+  selector:
+    app: litellm

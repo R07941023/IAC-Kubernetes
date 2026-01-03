@@ -22,7 +22,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: n8n-data-pvc  # storage name
-  namespace: app  # namespace name
+  namespace: ai  # namespace name
 spec:
   accessModes:
     - ReadWriteMany

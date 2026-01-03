@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: n8n
-  namespace: app
+  namespace: ai
 spec:
   replicas: 1
   selector:
@@ -49,13 +49,6 @@ spec:
               value: "true"
             - name: N8N_USER_MANAGEMENT_DISABLED
               value: "true"
-            - name: N8N_BASIC_AUTH_USER
-              value: n8n
-            - name: N8N_BASIC_AUTH_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: keyvault
-                  key: N8N_BASIC_AUTH_PASSWORD
             - name: N8N_ENCRYPTION_KEY
               valueFrom:
                 secretKeyRef:
