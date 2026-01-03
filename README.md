@@ -8,6 +8,7 @@ This repository provides a comprehensive set of examples for setting up a Kubern
 [Live Demo for Logging](https://kibana.mydormroom.dpdns.org/)  
 [Live Demo for Service Tracing](https://kiali.mydormroom.dpdns.org/)  
 [Live Demo for LLM Gateway](https://litellm.mydormroom.dpdns.org/)  
+[Live Demo for MCP Gateway](https://mcp-context-forge.mydormroom.dpdns.org/)  
 [Live Demo for LLM Tracing](https://langfuse.mydormroom.dpdns.org/)  
 [Live Demo for Postgresql](https://adminer.mydormroom.dpdns.org/)  
 [Live Demo for Minio](https://minio.mydormroom.dpdns.org/)  
@@ -81,6 +82,12 @@ This repository also includes common gateway, which you can use directly or as a
 An LLM Gateway is a middleware layer that sits between applications and large language model providers such as OpenAI, Anthropic, or Ollama. It provides a unified API, handles authentication and access control, manages traffic and rate-limits, logs usage, routes requests across different models, and tracks costs. By centralizing these functions, an LLM Gateway makes it easier for developers and organizations to switch models, improve reliability, and manage security and operations more effectively.
 
 ![LLM gateway](./images/litellm.jpg)
+
+### **mcp-context-forge**
+
+A Model Context Protocol (MCP) Gateway & Registry. Serves as a central management point for tools, resources, and prompts that can be accessed by MCP-compatible LLM applications. Converts REST API endpoints to MCP, composes virtual MCP servers with added security and observability, and converts between protocols (stdio, SSE, Streamable HTTP).
+
+![MCP gateway](./images/mcpgateway.jpg)
 
 ## Deployed Application
 
