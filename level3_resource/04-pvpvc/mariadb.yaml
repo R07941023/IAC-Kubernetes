@@ -1,0 +1,31 @@
+# Deploy pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-data-pv  # storage name
+spec:
+  storageClassName: mariadb-data-pv
+  capacity:
+    storage: 30Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/run/desktop/mnt/host/e/mariadb"
+    type: "DirectoryOrCreate"
+  persistentVolumeReclaimPolicy: Retain
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-data-pvc
+  namespace: infra-net
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: mariadb-data-pv
