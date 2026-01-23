@@ -1,47 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: maplestory
-  # n8n-deployment.yaml
-
+  namespace: argocd
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: maplestory
-  template:
-    metadata:
-      labels:
-        app: maplestory
-    spec:
-      hostname: maplestory
-      containers:
-        - name: maplestory
-          image: yenyinglu/maplestory
-          workingDir: /app
-          command:
-            - bash
-            - "-c"
-            - |
-              Xvfb :0 -screen 0 1024x768x16 &
-              export DISPLAY=:0 &&
-              apt-get install -y git &&
-              git clone -b dev  http://host.docker.internal:30832/YYLUI/maplestory_v113.git &&
-              cp -f /tmp/config/maplestory-setting.ini /app/maplestory_v113/settings.ini &&
-              cd /app/maplestory_v113 && chmod 777 ./run.sh && ./run.sh
-          ports:
-            - containerPort: 8484
-            - containerPort: 7575
-            - containerPort: 7576
-            - containerPort: 7577
-            - containerPort: 2555
-          stdin: true
-          tty: true
-          volumeMounts:
-            - name: maplestory-config
-              mountPath: /tmp/config
-      volumes:
-        - name: maplestory-config
-          configMap:
-            name: maplestory
-      restartPolicy: Always
+  project: default
+  source:
+    repoURL: https://gitlab.mydormroom.dpdns.org/YYLUI/maplestory_v113.git
+    targetRevision: main
+    path: deployment
+    kustomize: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: game
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
