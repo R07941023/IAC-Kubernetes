@@ -24,8 +24,6 @@ spec:
             # main
             - name: EXECUTIONS_MODE
               value: "queue"
-            - name: N8N_DISABLE_PRODUCTION_MAIN_PROCESS
-              value: "true"
             - name: N8N_RUNNERS_ENABLED
               value: "false"
             - name: OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS
