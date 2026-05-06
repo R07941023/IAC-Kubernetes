@@ -1,0 +1,48 @@
+# helm repo add neo4j https://helm.neo4j.com/neo4j
+# helm repo update
+# helm install neo4j neo4j/neo4j -n infra-net -f 09-neo4j.yaml
+# helm upgrade --install neo4j neo4j/neo4j -n infra-net -f 09-neo4j.yaml
+
+neo4j:
+  name: "neo4j"
+  minimumClusterSize: 1
+  passwordFromSecret: "keyvault"
+  edition: "community"
+  acceptLicenseAgreement: "yes"
+  
+  
+volumes:
+  data:
+    mode: defaultStorageClass
+    defaultStorageClass:
+      requests:
+        storage: 10Gi
+
+services:
+  # for web
+  default:
+    enabled: true
+    spec:
+      type: ClusterIP
+    ports:
+      http:
+        enabled: true
+      https:
+        enabled: false
+      bolt:
+        enabled: false
+  
+  # for neo4j
+  neo4j:
+    enabled: true
+    spec:
+      type: NodePort
+    ports:
+      http:
+        enabled: false
+      https:
+        enabled: false
+      bolt:
+        enabled: true
+        port: 7687
+        nodePort: 30633
